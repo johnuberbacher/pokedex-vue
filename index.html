@@ -6,16 +6,25 @@
   <meta content="width=device-width, initial-scale=1" name="viewport">
   <link href="css/style.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700" rel="stylesheet">
-	<script src="js/vue.min.js"></script>
+  <script src="js/vue.min.js"></script>
+  <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
 </head>
 <body>
   <div class="container">
-    <div id="app">
-		<div v-for="(item, i) in items" class="card">
-			<a v-on:click="getDetails(item.name)" class="post">Name: {{ item.name }}</a>
+	  <div id="app"> 
+		<div class="loading" v-if="loading">
+		  Loading...
 		</div>
+		<router-link to="/foo">Go to Foo</router-link>
+		<router-link to="/bar">Go to Bar</router-link>
+		<router-view></router-view>
+
+		<div v-for="(item, i) in items" class="card">
+		  <div class="post">Name: {{ item.name }}</div>
+		  <router-link :to="{name: 'Details', params:{itemName: item.name } }" v-on:click.native="getDetails(item)">Click</router-link>
+		</div>
+	  </div>
 	</div>
-  </div>
   <script src="js/jquery-3.1.0.min.js"></script>
   <script src="js/script.js"></script>
 </body>
